@@ -1,0 +1,42 @@
+C:\Users\USER\Desktop\datamining\.venv\Lib\site-packages\torch_geometric\data\in_memory_dataset.py:131: UserWarning: Weights only load failed. Please file an issue to make `torch.load(weights_only=True)` compatible in your case. Please use `torch.serialization.add_safe_globals([torch_geometric.data.data.DataEdgeAttr])` to allowlist this global.
+  out = fs.torch_load(path)
+C:\Users\USER\Desktop\datamining\.venv\Lib\site-packages\torch_geometric\data\in_memory_dataset.py:131: UserWarning: Weights only load failed. Please file an issue to make `torch.load(weights_only=True)` compatible in your case. Please use `torch.serialization.add_safe_globals([torch_geometric.data.data.DataEdgeAttr])` to allowlist this global.
+  out = fs.torch_load(path)
+C:\Users\USER\Desktop\datamining\.venv\Lib\site-packages\torch_geometric\data\in_memory_dataset.py:131: UserWarning: Weights only load failed. Please file an issue to make `torch.load(weights_only=True)` compatible in your case. Please use `torch.serialization.add_safe_globals([torch_geometric.data.data.DataEdgeAttr])` to allowlist this global.
+  out = fs.torch_load(path)
+C:\Users\USER\Desktop\datamining\.venv\Lib\site-packages\torch_geometric\data\in_memory_dataset.py:131: UserWarning: Weights only load failed. Please file an issue to make `torch.load(weights_only=True)` compatible in your case. Please use `torch.serialization.add_safe_globals([torch_geometric.data.data.DataEdgeAttr])` to allowlist this global.
+  out = fs.torch_load(path)
+C:\Users\USER\Desktop\datamining\.venv\Lib\site-packages\torch_geometric\data\in_memory_dataset.py:131: UserWarning: Weights only load failed. Please file an issue to make `torch.load(weights_only=True)` compatible in your case. Please use `torch.serialization.add_safe_globals([torch_geometric.data.data.DataEdgeAttr])` to allowlist this global.
+  out = fs.torch_load(path)
+
+----------------------runs  1 start
+spectral clustering on cpu...
+train over | ACC=0.6964, NMI=0.4362,  ARI=0.4549, f1_macro=0.6509, f1_micro=0.6964
+
+----------------------runs  1 over
+
+----------------------runs  2 start
+spectral clustering on cpu...
+train over | ACC=0.6982, NMI=0.4413,  ARI=0.4574, f1_macro=0.6497, f1_micro=0.6982
+
+----------------------runs  2 over
+
+----------------------runs  3 start
+spectral clustering on cpu...
+train over | ACC=0.7075, NMI=0.4530,  ARI=0.4682, f1_macro=0.6591, f1_micro=0.7075
+
+----------------------runs  3 over
+
+----------------------runs  4 start
+spectral clustering on cpu...
+train over | ACC=0.7024, NMI=0.4503,  ARI=0.4626, f1_macro=0.6514, f1_micro=0.7024
+
+----------------------runs  4 over
+
+----------------------runs  5 start
+spectral clustering on cpu...
+train over | ACC=0.7006, NMI=0.4449,  ARI=0.4588, f1_macro=0.6545, f1_micro=0.7006
+
+----------------------runs  5 over
+mean | ACC=0.7011, NMI=0.4451,  ARI=0.4604, f1_macro=0.6531, f1_micro=0.7011
+std | ACC=0.0038, NMI=0.0060,  ARI=0.0046, f1_macro=0.0034, f1_micro=0.0038

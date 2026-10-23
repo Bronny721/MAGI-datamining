@@ -1,0 +1,24 @@
+
+----------------------runs  1 start
+random seed :  362505 
+ Namespace(verbose=True, runs=1, max_duration=1, kmeans_device='cuda', kmeans_batch=300000, batchsize=512, test_batch=2000, dataset='ogbn-products', hidden_channels='1024,1024,256', size='10,10,10', projection='', tau=0.9, ns=0.1, wt=20, wl=4, n=2048, dropout=0.0, lr=0.01, wd=0.0, epochs=400, num_workers=0, legacy_sampler=False, pos_weight='uniform', deg_neg=False, deg_beta=1.0, pos_deg=False, pos_beta=1.0, sp_warmup=0, sp_drop=0.1, sp_interval=10, pos_thresh='mean', se_warmup=0, se_tau=0.95, se_interval=10, result='')
+Loading ogbn-products is over, num_nodes:  2449029, num_edges:  126167053, num_feats:  100, time costs:  11.54
+Start training
+(T) | Epoch 01, loss: 7.3662, train_time_cost: 4.00, examples: 4512, nodes: 4512, gpu_peak: 4.70G
+(T) | Epoch 01, loss: 7.5631, train_time_cost: 8.55, examples: 4466, nodes: 4466, gpu_peak: 4.83G
+(T) | Epoch 01, loss: 7.5525, train_time_cost: 12.80, examples: 4413, nodes: 4413, gpu_peak: 4.83G
+(T) | Epoch 01, loss: 7.5720, train_time_cost: 17.04, examples: 4510, nodes: 4510, gpu_peak: 4.83G
+(T) | Epoch 01, loss: 7.5655, train_time_cost: 21.28, examples: 4478, nodes: 4478, gpu_peak: 4.83G
+(T) | Epoch 01, loss: 7.5992, train_time_cost: 25.60, examples: 4649, nodes: 4649, gpu_peak: 4.83G
+(T) | Epoch 01, loss: 7.5725, train_time_cost: 29.86, examples: 4514, nodes: 4514, gpu_peak: 4.83G
+(T) | Epoch 01, loss: 7.5612, train_time_cost: 34.10, examples: 4459, nodes: 4459, gpu_peak: 4.83G
+(T) | Epoch 01, loss: 7.5720, train_time_cost: 39.54, examples: 4514, nodes: 4514, gpu_peak: 4.84G
+(T) | Epoch 01, loss: 7.5731, train_time_cost: 44.29, examples: 4521, nodes: 4521, gpu_peak: 4.84G
+(T) | Epoch 01, loss: 7.5768, train_time_cost: 48.59, examples: 4542, nodes: 4542, gpu_peak: 4.84G
+(T) | Epoch 01, loss: 7.5647, train_time_cost: 52.90, examples: 4485, nodes: 4485, gpu_peak: 4.84G
+(T) | Epoch 01, loss: 7.5554, train_time_cost: 56.34, examples: 4445, nodes: 4445, gpu_peak: 4.84G
+(T) | Epoch 01, loss: 7.5367, train_time_cost: 59.83, examples: 4361, nodes: 4361, gpu_peak: 4.84G
+(T) | Epoch 01, loss: 7.5807, train_time_cost: 64.11, examples: 4591, nodes: 4591, gpu_peak: 4.84G
+*********************** Maximum training time is exceeded ***********************
+Finish training, training time cost: 64.12
+  0%|          | 0/1225 [00:00<?, ?it/s]  0%|          | 1/1225 [00:02<51:36,  2.53s/it]  0%|          | 2/1225 [00:05<50:59,  2.50s/it]  0%|          | 3/1225 [00:07<50:48,  2.49s/it]  0%|          | 4/1225 [00:10<50:54,  2.50s/it]  0%|          | 5/1225 [00:12<50:49,  2.50s/it]  0%|          | 6/1225 [00:15<50:48,  2.50s/it]  1%|          | 7/1225 [00:17<50:43,  2.50s/it]  1%|          | 8/1225 [00:20<50:41,  2.50s/it]  1%|          | 9/1225 [00:22<50:34,  2.50s/it]  1%|          | 10/1225 [00:24<50:34,  2.50s/it]  1%|          | 11/1225 [00:27<50:23,  2.49s/it]  1%|          | 12/1225 [00:29<50:29,  2.50s/it]  1%|          | 13/1225 [00:32<50:25,  2.50s/it]  1%|          | 14/1225 [00:34<50:18,  2.49s/it]  1%|          | 15/1225 [00:37<50:13,  2.49s/it]  1%|¢j         | 16/1225 [00:39<50:10,  2.49s/it]  1%|¢j         | 17/1225 [00:42<50:18,  2.50s/it]  1%|¢j         | 18/1225 [00:44<50:11,  2.49s/it]  2%|¢j         | 19/1225 [00:47<50:00,  2.49s/it]  2%|¢j         | 20/1225 [00:49<49:58,  2.49s/it]  2%|¢j         | 21/1225 [00:52<49:55,  2.49s/it]  2%|¢j         | 22/1225 [00:54<50:01,  2.49s/it]  2%|¢j         | 23/1225 [00:57<49:56,  2.49s/it]  2%|¢j         | 24/1225 [00:59<50:00,  2.50s/it]  2%|¢j         | 25/1225 [01:02<50:00,  2.50s/it]  2%|¢j         | 26/1225 [01:04<49:58,  2.50s/it]  2%|¢j         | 27/1225 [01:07<50:07,  2.51s/it]  2%|¢j         | 28/1225 [01:09<49:56,  2.50s/it]  2%|¢j         | 29/1225 [01:12<50:06,  2.51s/it]  2%|¢j         | 30/1225 [01:14<50:05,  2.52s/it]  3%|¢k         | 31/1225 [01:17<50:03,  2.52s/it]  3%|¢k         | 32/1225 [01:20<49:59,  2.51s/it]  3%|¢k         | 33/1225 [01:22<50:04,  2.52s/it]  3%|¢k         | 34/1225 [01:25<50:03,  2.52s/it]  3%|¢k         | 35/1225 [01:27<50:00,  2.52s/it]  3%|¢k         | 36/1225 [01:30<50:06,  2.53s/it]  3%|¢k         | 37/1225 [01:32<50:03,  2.53s/it]  3%|¢k         | 38/1225 [01:35<49:56,  2.52s/it]  3%|¢k         | 39/1225 [01:37<49:46,  2.52s/it]  3%|¢k         | 40/1225 [01:40<49:38,  2.51s/it]  3%|¢k         | 41/1225 [01:42<49:28,  2.51s/it]  3%|¢k         | 42/1225 [01:45<49:32,  2.51s/it]  4%|¢k         | 43/1225 [01:47<49:45,  2.53s/it]  4%|¢k         | 44/1225 [01:50<49:38,  2.52s/it]  4%|¢k         | 45/1225 [01:52<49:37,  2.52s/it]  4%|¢l         | 46/1225 [01:55<49:24,  2.51s/it]  4%|¢l         | 47/1225 [01:57<49:17,  2.51s/it]  4%|¢l         | 48/1225 [02:00<49:09,  2.51s/it]

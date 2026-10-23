@@ -1,0 +1,20 @@
+
+----------------------runs  1 start
+spectral clustering on cpu...
+train over | ACC=0.7852, NMI=0.6964,  ARI=0.6134, f1_macro=0.7215, f1_micro=0.7852
+
+----------------------runs  1 over
+
+----------------------runs  2 start
+spectral clustering on cpu...
+train over | ACC=0.7897, NMI=0.6994,  ARI=0.6181, f1_macro=0.7260, f1_micro=0.7897
+
+----------------------runs  2 over
+
+----------------------runs  3 start
+spectral clustering on cpu...
+train over | ACC=0.7358, NMI=0.6345,  ARI=0.5393, f1_macro=0.7056, f1_micro=0.7358
+
+----------------------runs  3 over
+mean | ACC=0.7702, NMI=0.6768,  ARI=0.5903, f1_macro=0.7177, f1_micro=0.7702
+std | ACC=0.0244, NMI=0.0299,  ARI=0.0361, f1_macro=0.0087, f1_micro=0.0244

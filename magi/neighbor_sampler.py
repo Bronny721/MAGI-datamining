@@ -27,6 +27,17 @@ class Adj(NamedTuple):
         return Adj(adj_t, e_id, self.size)
 
 
+def rw_cooccurrence(rw: Tensor, num_nodes: int):
+    """Vectorized per-row unique counts of a random-walk matrix.
+
+    rw: [B, L] visited nodes, one row per start node.
+    Returns (row, node, count) for every distinct (row, node) pair, sorted by row then node.
+    """
+    rows = torch.arange(rw.shape[0]).unsqueeze(1).expand_as(rw)
+    keys, cnt = torch.unique(rows.reshape(-1) * num_nodes + rw.reshape(-1), return_counts=True)
+    return keys // num_nodes, keys % num_nodes, cnt
+
+
 class NeighborSampler(torch.utils.data.DataLoader):
     r"""
     This code adapted from the pytorch geometric
@@ -44,6 +55,7 @@ class NeighborSampler(torch.utils.data.DataLoader):
                  num_nodes: Optional[int] = None,
                  return_e_id: bool = True,
                  transform: Callable = None,
+                 legacy_sampling: bool = False,
                  **kwargs):
 
         edge_index = edge_index.to('cpu')
@@ -62,6 +74,7 @@ class NeighborSampler(torch.utils.data.DataLoader):
         self.drop_last = drop_last
         self.wt = wt
         self.wl = wl
+        self.legacy_sampling = legacy_sampling
 
         self.sizes = sizes
         self.return_e_id = return_e_id
@@ -103,6 +116,38 @@ class NeighborSampler(torch.utils.data.DataLoader):
             node_idx.view(-1).tolist(), collate_fn=self.sample, drop_last=self.drop_last, **kwargs)
 
     def get_batch(self, random_nodes):
+        if self.legacy_sampling:
+            return self.get_batch_legacy(random_nodes)
+        num_nodes = self.adj.sparse_size(0)
+
+        # stage one: expand seeds with nodes whose co-occurrence count is above the row mean
+        rw1 = self._walk(random_nodes)
+        row, node, cnt = rw_cooccurrence(rw1, num_nodes)
+        row_mean = torch.zeros(random_nodes.shape[0]).scatter_reduce_(
+            0, row, cnt.float(), reduce='mean', include_self=False)
+        batch = torch.cat([node[cnt > row_mean[row]], random_nodes]).unique()
+
+        # stage two: co-occurrence counts among batch nodes (the sampled modularity matrix)
+        rw2 = self._walk(batch)
+        row, node, cnt = rw_cooccurrence(rw2, num_nodes)
+        col = torch.searchsorted(batch, node).clamp_(max=batch.shape[0] - 1)
+        keep = (batch[col] == node) & (row != col)
+        row, col, cnt = row[keep], col[keep], cnt[keep]
+
+        # explicit zero diagonal, as in the legacy implementation
+        diag = torch.arange(batch.shape[0])
+        adj_batch = SparseTensor(row=torch.cat([row, diag]), col=torch.cat([col, diag]),
+                                 value=torch.cat([cnt, torch.zeros_like(diag)]),
+                                 sparse_sizes=(batch.shape[0], batch.shape[0]))
+        return batch, adj_batch
+
+    def _walk(self, start):
+        rw = self.adj.random_walk(start.repeat(self.wt), self.wl)[:, 1:]
+        if not isinstance(rw, torch.Tensor):
+            rw = rw[0]
+        return rw.t().reshape(-1, start.shape[0]).t()
+
+    def get_batch_legacy(self, random_nodes):
         random_nodes_count = random_nodes.shape[0]
         rowptr, col, _ = self.adj.csr()
 

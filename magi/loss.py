@@ -9,45 +9,51 @@ class Loss(nn.Module):
         self.scale_by_temperature = scale_by_temperature
         self.scale_by_weight = scale_by_weight
 
-    def forward(self, out, mask):
-        device = (torch.device('cuda') if out.is_cuda else torch.device('cpu'))
+    def forward(self, out, mask, pos_weight='uniform', neg_weight=None, fn_labels=None):
+        """Modularity-guided contrastive loss.
 
+        pos_weight: 'uniform' (original MAGI) averages log-probs over positives;
+                    'count' weights each positive pair by its random-walk co-occurrence count.
+        neg_weight: optional [B] node weights in the denominator (e.g. degree / mean degree),
+                    i.e. the d_u d_v / 2m null-model term of modularity.
+        fn_labels:  optional [B] pseudo cluster labels; non-positive pairs in the same cluster
+                    are treated as false negatives and removed from the denominator.
+        """
+        device = out.device
         row, col, val = mask.storage.row(), mask.storage.col(), mask.storage.value()
         row, col, val = row.to(device), col.to(device), val.to(device)
         batch_size = out.shape[0]
 
-        # compute logits
+        # compute logits; only the [B, B] similarity and one logsumexp buffer are materialized
         dot = torch.matmul(out, out.T)
         dot = torch.div(dot, self.temperature)
+        pos_logits = dot[row, col]
 
-        # for numerical stability
-        logits_max, _ = torch.max(dot, dim=1, keepdim=True)
-        dot = dot - logits_max.detach()
-
-        logits_mask = torch.scatter(
-            torch.ones(batch_size, batch_size).to(device),
-            1,
-            torch.arange(batch_size).view(-1, 1).to(device),
-            0
-        )
-
-        exp_logits = torch.exp(dot) * logits_mask
-        log_probs = dot - torch.log(exp_logits.sum(1, keepdim=True))
+        dot.fill_diagonal_(float('-inf'))
+        if fn_labels is not None:
+            fn_labels = fn_labels.to(device)
+            same = fn_labels.view(-1, 1) == fn_labels.view(1, -1)
+            same[row, col] = False
+            dot = dot.masked_fill(same, float('-inf'))
+        if neg_weight is not None:
+            dot = dot + torch.log(neg_weight.to(device)).view(1, -1)
+        log_probs = pos_logits - torch.logsumexp(dot, dim=1)[row]
 
         if torch.any(torch.isnan(log_probs)):
             raise ValueError("Log_prob has nan!")
 
-        labels = row.view(row.shape[0], 1)
-        unique_labels, labels_count = labels.unique(dim=0, return_counts=True)
-        log_probs = log_probs[row, col]
-
-        log_probs = log_probs.view(-1, 1)
-        loss = torch.zeros_like(unique_labels, dtype=torch.float).to(device)
-        loss.scatter_add_(0, labels, log_probs)
-        loss = -1 * loss / labels_count.float().unsqueeze(1)
+        if pos_weight == 'uniform':
+            w = torch.ones_like(log_probs)
+        elif pos_weight == 'count':
+            w = val.float()
+        else:
+            raise ValueError(f"Unknown pos_weight {pos_weight}")
+        num = torch.zeros(batch_size, device=device).scatter_add_(0, row, w * log_probs)
+        den = torch.zeros(batch_size, device=device).scatter_add_(0, row, w)
+        has_pos = den > 0
+        loss = -num[has_pos] / den[has_pos]
 
         if self.scale_by_temperature:
             loss *= self.temperature
         loss = loss.mean()
         return loss
-

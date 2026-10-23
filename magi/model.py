@@ -75,5 +75,5 @@ class Model(torch.nn.Module):
                 x = self.activations[i](x)
         return x
 
-    def loss(self, x: torch.Tensor, mask):
-        return self.Loss(x, mask)
+    def loss(self, x: torch.Tensor, mask, **kwargs):
+        return self.Loss(x, mask, **kwargs)

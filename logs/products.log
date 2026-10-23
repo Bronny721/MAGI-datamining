@@ -1,0 +1,46 @@
+
+----------------------runs  1 start
+random seed :  723434 
+ Namespace(verbose=True, runs=1, max_duration=60, kmeans_device='cuda', kmeans_batch=300000, batchsize=2048, dataset='ogbn-products', hidden_channels='1024,1024,256', size='10,10,10', projection='', tau=0.9, ns=0.1, wt=20, wl=4, n=2048, dropout=0.0, lr=0.01, wd=0.0, epochs=400, num_workers=0, legacy_sampler=False, pos_weight='uniform', deg_neg=False, deg_beta=1.0)
+Loading ogbn-products is over, num_nodes:  2449029, num_edges:  126167053, num_feats:  100, time costs:  12.40
+Start training
+(T) | Epoch 01, loss: 8.6279, train_time_cost: 22.05, examples: 17955
+(T) | Epoch 01, loss: 8.8109, train_time_cost: 38.55, examples: 17871
+(T) | Epoch 01, loss: 8.8141, train_time_cost: 63.84, examples: 17932
+(T) | Epoch 01, loss: 8.8215, train_time_cost: 85.90, examples: 18083
+(T) | Epoch 01, loss: 8.8127, train_time_cost: 109.77, examples: 17914
+(T) | Epoch 01, loss: 8.7929, train_time_cost: 130.40, examples: 17534
+(T) | Epoch 01, loss: 8.8035, train_time_cost: 151.31, examples: 17760
+(T) | Epoch 01, loss: 8.7946, train_time_cost: 273.46, examples: 17610
+(T) | Epoch 01, loss: 8.8032, train_time_cost: 371.91, examples: 17834
+(T) | Epoch 01, loss: 8.8159, train_time_cost: 519.82, examples: 18203
+(T) | Epoch 01, loss: 8.7808, train_time_cost: 711.06, examples: 17775
+(T) | Epoch 01, loss: 8.7506, train_time_cost: 826.02, examples: 17790
+(T) | Epoch 01, loss: 8.6629, train_time_cost: 941.54, examples: 17794
+(T) | Epoch 01, loss: 8.5395, train_time_cost: 1043.03, examples: 17894
+(T) | Epoch 01, loss: 8.4834, train_time_cost: 1104.79, examples: 18013
+(T) | Epoch 01, loss: 8.4197, train_time_cost: 1209.84, examples: 17887
+(T) | Epoch 01, loss: 8.3497, train_time_cost: 1331.20, examples: 17643
+(T) | Epoch 01, loss: 8.3182, train_time_cost: 1349.69, examples: 17820
+(T) | Epoch 01, loss: 8.2943, train_time_cost: 1460.86, examples: 17985
+(T) | Epoch 01, loss: 8.2612, train_time_cost: 1602.17, examples: 17657
+(T) | Epoch 01, loss: 8.2460, train_time_cost: 1622.36, examples: 17913
+(T) | Epoch 01, loss: 8.2379, train_time_cost: 1641.34, examples: 18045
+(T) | Epoch 01, loss: 8.2193, train_time_cost: 1732.64, examples: 18057
+(T) | Epoch 01, loss: 8.2110, train_time_cost: 1881.24, examples: 17849
+(T) | Epoch 01, loss: 8.2018, train_time_cost: 1901.31, examples: 17927
+(T) | Epoch 01, loss: 8.1981, train_time_cost: 1922.03, examples: 18042
+(T) | Epoch 01, loss: 8.1919, train_time_cost: 1940.53, examples: 18017
+(T) | Epoch 01, loss: 8.1786, train_time_cost: 1957.56, examples: 17834
+(T) | Epoch 01, loss: 8.1696, train_time_cost: 1984.06, examples: 17855
+(T) | Epoch 01, loss: 8.1723, train_time_cost: 2012.57, examples: 17920
+(T) | Epoch 01, loss: 8.1463, train_time_cost: 2030.84, examples: 17426
+(T) | Epoch 01, loss: 8.1747, train_time_cost: 2048.82, examples: 18132
+(T) | Epoch 01, loss: 8.1484, train_time_cost: 2066.78, examples: 17683
+(T) | Epoch 01, loss: 8.1429, train_time_cost: 2124.03, examples: 17753
+(T) | Epoch 01, loss: 8.1323, train_time_cost: 2176.55, examples: 17677
+(T) | Epoch 01, loss: 8.1424, train_time_cost: 2228.52, examples: 17879
+(T) | Epoch 01, loss: 8.1188, train_time_cost: 2380.15, examples: 17629
+(T) | Epoch 01, loss: 8.1312, train_time_cost: 2533.76, examples: 17917
+(T) | Epoch 01, loss: 8.1264, train_time_cost: 2682.33, examples: 17850
+(T) | Epoch 01, loss: 8.1275, train_time_cost: 2700.18, examples: 18074

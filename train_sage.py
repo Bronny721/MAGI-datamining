@@ -11,9 +11,14 @@ from torch_geometric.datasets import Reddit
 from torch_geometric.utils import to_undirected, add_remaining_self_loops
 from torch_sparse import SparseTensor
 
+# PyTorch >= 2.6 defaults torch.load(weights_only=True); ogb's dataset loader needs these PyG classes allowlisted
+from torch_geometric.data.data import DataEdgeAttr, DataTensorAttr
+from torch_geometric.data.storage import GlobalStorage
+torch.serialization.add_safe_globals([DataEdgeAttr, DataTensorAttr, GlobalStorage])
+
 from magi.model import Model, Encoder
 from magi.neighbor_sampler import NeighborSampler
-from magi.utils import setup_seed, get_mask, clustering
+from magi.utils import setup_seed, get_mask, clustering, prune_positives, expand_positives
 
 
 parser = argparse.ArgumentParser()
@@ -26,6 +31,7 @@ parser.add_argument('--kmeans_device', type=str,
 parser.add_argument('--kmeans_batch', type=int, default=-1,
                     help='batch size of kmeans on GPU, -1 means full batch')
 parser.add_argument('--batchsize', type=int, default=2048, help='')
+parser.add_argument('--test_batch', type=int, default=10000, help='seed nodes per inference batch')
 
 # dataset para
 parser.add_argument('--dataset', type=str, default='ogbn-arxiv')
@@ -47,6 +53,23 @@ parser.add_argument('--dropout', type=float, default=0, help='')
 parser.add_argument('--lr', type=float, default=0.01)
 parser.add_argument('--wd', type=float, default=0)
 parser.add_argument('--epochs', type=int, default=100)
+
+# engineering / improvement para
+parser.add_argument('--num_workers', type=int, default=6)
+parser.add_argument('--legacy_sampler', action='store_true', help='use the original per-node python sampler')
+parser.add_argument('--pos_weight', type=str, default='uniform', help='uniform (MAGI) or count')
+parser.add_argument('--deg_neg', action='store_true', help='degree-weighted negatives (modularity null model)')
+parser.add_argument('--deg_beta', type=float, default=1.0, help='negative weight = (deg / mean deg) ** beta')
+parser.add_argument('--pos_deg', action='store_true', help='degree-corrected null model for positive selection')
+parser.add_argument('--pos_beta', type=float, default=1.0, help='exponent of degree in the positive null model')
+parser.add_argument('--sp_warmup', type=int, default=0, help='epoch to start self-paced positive denoising (0: off)')
+parser.add_argument('--sp_drop', type=float, default=0.1, help='fraction of positives dropped per anchor')
+parser.add_argument('--sp_interval', type=int, default=10, help='epochs between positive re-ranking')
+parser.add_argument('--pos_thresh', type=str, default='mean', help='mean (official code) or all (Eq. 9, every visited node)')
+parser.add_argument('--se_warmup', type=int, default=0, help='epoch to start embedding-guided positive expansion (0: off)')
+parser.add_argument('--se_tau', type=float, default=0.95, help='embedding cosine similarity threshold for expansion')
+parser.add_argument('--se_interval', type=int, default=10, help='epochs between positive expansion updates')
+parser.add_argument('--result', type=str, default='', help='csv file to save results')
 args = parser.parse_args()
 
 
@@ -80,6 +103,9 @@ def train():
     adj = SparseTensor(row=edge_index[0],
                        col=edge_index[1], sparse_sizes=(N, N))
     adj.fill_value_(1.)
+    raw_deg = adj.storage.rowcount().float()
+    deg = raw_deg
+    deg = (deg / deg.mean()) ** args.deg_beta
 
     hidden = list(map(int, args.hidden_channels.split(',')))
     if args.projection == '':
@@ -98,16 +124,17 @@ def train():
                                    batch_size=args.batchsize,
                                    shuffle=True,
                                    drop_last=True,
-                                   num_workers=6)
+                                   legacy_sampling=args.legacy_sampler,
+                                   num_workers=args.num_workers)
 
     test_loader = NeighborSampler(edge_index, adj,
                                   is_train=False,
                                   node_idx=None,
                                   sizes=size,
-                                  batch_size=10000,
+                                  batch_size=args.test_batch,
                                   shuffle=False,
                                   drop_last=False,
-                                  num_workers=6)
+                                  num_workers=args.num_workers)
 
     encoder = Encoder(num_features, hidden_channels=hidden,
                       dropout=args.dropout, ns=args.ns).to(device)
@@ -135,11 +162,17 @@ def train():
                 adjs = [adjs]
             adjs = [adj.to(device) for adj in adjs]
 
-            adj_ = get_mask(adj_batch)
+            adj_ = get_mask(adj_batch, deg=raw_deg[batch] if args.pos_deg else None, beta=args.pos_beta,
+                            thresh=args.pos_thresh)
             optimizer.zero_grad()
             out = model(x[n_id].to(device), adjs=adjs)
             out = F.normalize(out, p=2, dim=1)
-            loss = model.loss(out, adj_)
+            if args.sp_warmup > 0 and epoch >= args.sp_warmup:
+                adj_ = prune_positives(adj_, out.detach(), args.sp_drop)
+            if args.se_warmup > 0 and epoch >= args.se_warmup:
+                adj_ = expand_positives(adj_batch, adj_, out.detach(), args.se_tau)
+            neg_weight = deg[batch] if args.deg_neg else None
+            loss = model.loss(out, adj_, pos_weight=args.pos_weight, neg_weight=neg_weight)
 
             loss.backward()
             optimizer.step()
@@ -148,7 +181,8 @@ def train():
 
             if args.verbose:
                 print(f'(T) | Epoch {epoch:02d}, loss: {loss:.4f}, '
-                      f'train_time_cost: {time.time() - ts_train:.2f}, examples: {batch_size:d}')
+                      f'train_time_cost: {time.time() - ts_train:.2f}, examples: {batch_size:d}, '
+                      f'nodes: {out.size(0):d}, gpu_peak: {torch.cuda.max_memory_allocated() / 2**30:.2f}G')
 
             train_time_cost = time.time() - ts_train
             if train_time_cost // 60 >= args.max_duration:
@@ -161,6 +195,8 @@ def train():
 
     print(f'Finish training, training time cost: {time.time() - ts_train:.2f}')
 
+    del optimizer
+    torch.cuda.empty_cache()
     with torch.no_grad():
         model.eval()
         z = []
@@ -221,5 +257,4 @@ def run(runs=1, result=None):
 
 
 if __name__ == '__main__':
-    result = None
-    run(args.runs, result)
+    run(args.runs, args.result or None)

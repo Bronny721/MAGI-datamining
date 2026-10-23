@@ -1,0 +1,62 @@
+
+----------------------runs  1 start
+spectral clustering on cpu...
+train over | ACC=0.7195, NMI=0.6238,  ARI=0.5229, f1_macro=0.7046, f1_micro=0.7195
+
+----------------------runs  1 over
+
+----------------------runs  2 start
+spectral clustering on cpu...
+train over | ACC=0.7298, NMI=0.6218,  ARI=0.5266, f1_macro=0.7097, f1_micro=0.7298
+
+----------------------runs  2 over
+
+----------------------runs  3 start
+spectral clustering on cpu...
+train over | ACC=0.7320, NMI=0.6271,  ARI=0.5293, f1_macro=0.7169, f1_micro=0.7320
+
+----------------------runs  3 over
+
+----------------------runs  4 start
+spectral clustering on cpu...
+train over | ACC=0.7829, NMI=0.6796,  ARI=0.6150, f1_macro=0.7230, f1_micro=0.7829
+
+----------------------runs  4 over
+
+----------------------runs  5 start
+spectral clustering on cpu...
+train over | ACC=0.7852, NMI=0.6919,  ARI=0.6133, f1_macro=0.7218, f1_micro=0.7852
+
+----------------------runs  5 over
+
+----------------------runs  6 start
+spectral clustering on cpu...
+train over | ACC=0.7068, NMI=0.6455,  ARI=0.5340, f1_macro=0.6873, f1_micro=0.7068
+
+----------------------runs  6 over
+
+----------------------runs  7 start
+spectral clustering on cpu...
+train over | ACC=0.7156, NMI=0.6504,  ARI=0.5431, f1_macro=0.6926, f1_micro=0.7156
+
+----------------------runs  7 over
+
+----------------------runs  8 start
+spectral clustering on cpu...
+train over | ACC=0.7132, NMI=0.6451,  ARI=0.5505, f1_macro=0.6902, f1_micro=0.7132
+
+----------------------runs  8 over
+
+----------------------runs  9 start
+spectral clustering on cpu...
+train over | ACC=0.7092, NMI=0.6287,  ARI=0.5221, f1_macro=0.6977, f1_micro=0.7092
+
+----------------------runs  9 over
+
+----------------------runs  10 start
+spectral clustering on cpu...
+train over | ACC=0.7210, NMI=0.6541,  ARI=0.5485, f1_macro=0.6957, f1_micro=0.7210
+
+----------------------runs  10 over
+mean | ACC=0.7315, NMI=0.6468,  ARI=0.5505, f1_macro=0.7039, f1_micro=0.7315
+std | ACC=0.0274, NMI=0.0225,  ARI=0.0332, f1_macro=0.0126, f1_micro=0.0274

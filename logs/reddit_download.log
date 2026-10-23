@@ -1,0 +1,5 @@
+Downloading https://data.dgl.ai/dataset/reddit.zip
+Extracting data\Reddit\raw\reddit.zip
+Processing...
+Done!
+Data(x=[232965, 602], edge_index=[2, 114615892], y=[232965], train_mask=[232965], val_mask=[232965], test_mask=[232965])

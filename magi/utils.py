@@ -87,15 +87,68 @@ def clustering(feature, n_clusters, true_labels, kmeans_device='cpu', batch_size
     return acc, nmi, adjscore, f1_macro, f1_micro
 
 
-def get_mask(adj):
+def get_mask(adj, deg=None, beta=1.0, thresh='mean'):
+    """Select positive pairs whose random-walk co-occurrence exceeds the row's expected count.
+
+    deg=None: the original MAGI null model, expected count = row mean.
+    deg given ([n] node degrees aligned with adj columns): degree-corrected null model,
+    expected count of v = row mean * d_v^beta / (row mean of d^beta), so hub nodes that
+    are visited often only because of their degree are not taken as positives.
+    """
+    if thresh == 'all':
+        # Eq. (9) of the paper with |B| = batch size: every visited node is a positive
+        value = adj.storage.value()
+        keep = value > 0
+        return SparseTensor(row=adj.storage.row()[keep], col=adj.storage.col()[keep],
+                            value=value[keep], sparse_sizes=(adj.size(0), adj.size(1)))
     batch_mean = adj.mean(dim=1)
-    mean = batch_mean[torch.LongTensor(adj.storage.row())]
+    row_idx = torch.LongTensor(adj.storage.row())
+    mean = batch_mean[row_idx]
+    if deg is not None:
+        col_idx = adj.storage.col()
+        d = deg.float()[col_idx] ** beta
+        row_d = torch.zeros(adj.size(0)).scatter_reduce_(0, row_idx, d, reduce='mean', include_self=False)
+        mean = mean * d / row_d[row_idx]
     mask = (adj.storage.value() - mean) > - 1e-10
     row, col, val = adj.storage.row()[mask], adj.storage.col()[
         mask], adj.storage.value()[mask]
     adj_ = SparseTensor(row=row, col=col, value=val,
                         sparse_sizes=(adj.size(0), adj.size(1)))
     return adj_
+
+
+@torch.no_grad()
+def prune_positives(mask, z, q):
+    """Self-paced positive denoising: for every anchor, drop the fraction q of its
+    structural positives that have the lowest similarity under the current embeddings z."""
+    row, col, val = mask.coo()
+    row, col = row.to(z.device), col.to(z.device)
+    sim = (z[row] * z[col]).sum(1)
+    # sort by anchor, then by similarity (descending); cosine sim is in [-1, 1]
+    order = torch.argsort(row.double() * 4 - sim.double())
+    row_sorted = row[order]
+    cnt = torch.bincount(row_sorted, minlength=mask.size(0))
+    start = torch.cumsum(cnt, 0) - cnt
+    rank = torch.arange(row_sorted.numel(), device=z.device) - start[row_sorted]
+    keep = torch.empty_like(rank, dtype=torch.bool)
+    keep[order] = rank < torch.ceil(cnt[row_sorted] * (1 - q))
+    keep = keep.cpu()
+    return SparseTensor(row=row.cpu()[keep], col=col.cpu()[keep], value=val[keep],
+                        sparse_sizes=mask.sizes())
+
+
+@torch.no_grad()
+def expand_positives(adj, mask, z, threshold):
+    """Embedding-guided positive expansion: add visited-but-below-mean pairs of the
+    random-walk co-occurrence matrix adj whose current embedding similarity exceeds threshold."""
+    row, col, val = adj.coo()
+    n = adj.size(1)
+    mrow, mcol, _ = mask.coo()
+    is_pos = torch.isin(row * n + col, mrow * n + mcol)
+    cand = (~is_pos) & (row != col) & (val > 0)
+    sim = (z[row.to(z.device)] * z[col.to(z.device)]).sum(1).cpu()
+    keep = is_pos | (cand & (sim > threshold))
+    return SparseTensor(row=row[keep], col=col[keep], value=val[keep], sparse_sizes=mask.sizes())
 
 
 def scale(z: torch.Tensor):

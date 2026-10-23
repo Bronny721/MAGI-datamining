@@ -1,0 +1,14 @@
+# Versions used for every experiment in this repo (Python 3.13.4, CUDA 11.8, Windows 11).
+# torch / PyG extensions must be installed from their own wheel indexes, see readme.md.
+torch==2.7.1+cu118
+torch-geometric==2.8.1
+torch-cluster==1.6.3
+torch-scatter==2.1.2
+torch-sparse==0.6.18
+ogb==1.3.6
+numpy==2.2.6
+scipy==1.16.0
+scikit-learn==1.7.1
+munkres==2.0.0
+matplotlib==3.10.3
+tqdm==4.67.1

@@ -1,0 +1,114 @@
+
+----------------------runs  1 start
+random seed :  881964 
+ Namespace(verbose=True, runs=1, max_duration=1, kmeans_device='cpu', kmeans_batch=-1, batchsize=1024, dataset='Reddit', hidden_channels='1024,256', size='10,10', projection='', tau=0.5, ns=0.5, wt=20, wl=5, n=2048, dropout=0.0, lr=0.01, wd=0.0, epochs=400, num_workers=0, legacy_sampler=False, pos_weight='uniform', deg_neg=False, deg_beta=1.0, pos_deg=False, pos_beta=1.0, sp_warmup=0, sp_drop=0.1, sp_interval=10, pos_thresh='mean', se_warmup=0, se_tau=0.95, se_interval=10, result='')
+Loading Reddit is over, num_nodes:  232965, num_edges:  114848857, num_feats:  602, time costs:  13.66
+Start training
+(T) | Epoch 01, loss: 3.8961, train_time_cost: 1.14, examples: 4306, nodes: 4306, gpu_peak: 1.79G
+(T) | Epoch 01, loss: 3.9101, train_time_cost: 1.87, examples: 4194, nodes: 4194, gpu_peak: 1.81G
+(T) | Epoch 01, loss: 3.8196, train_time_cost: 2.72, examples: 4172, nodes: 4172, gpu_peak: 1.81G
+(T) | Epoch 01, loss: 3.7653, train_time_cost: 3.58, examples: 4163, nodes: 4163, gpu_peak: 1.81G
+(T) | Epoch 01, loss: 3.7651, train_time_cost: 4.41, examples: 4218, nodes: 4218, gpu_peak: 1.81G
+(T) | Epoch 01, loss: 3.7391, train_time_cost: 5.32, examples: 4322, nodes: 4322, gpu_peak: 1.83G
+(T) | Epoch 01, loss: 3.7284, train_time_cost: 5.90, examples: 4201, nodes: 4201, gpu_peak: 1.83G
+(T) | Epoch 01, loss: 3.7063, train_time_cost: 6.48, examples: 4113, nodes: 4113, gpu_peak: 1.83G
+(T) | Epoch 01, loss: 3.7132, train_time_cost: 7.09, examples: 4382, nodes: 4382, gpu_peak: 1.84G
+(T) | Epoch 01, loss: 3.7313, train_time_cost: 7.67, examples: 4289, nodes: 4289, gpu_peak: 1.84G
+(T) | Epoch 01, loss: 3.7003, train_time_cost: 8.25, examples: 4192, nodes: 4192, gpu_peak: 1.84G
+(T) | Epoch 01, loss: 3.6765, train_time_cost: 8.82, examples: 4155, nodes: 4155, gpu_peak: 1.84G
+(T) | Epoch 01, loss: 3.6860, train_time_cost: 9.41, examples: 4216, nodes: 4216, gpu_peak: 1.84G
+(T) | Epoch 01, loss: 3.6927, train_time_cost: 10.00, examples: 4294, nodes: 4294, gpu_peak: 1.84G
+(T) | Epoch 01, loss: 3.7095, train_time_cost: 10.60, examples: 4373, nodes: 4373, gpu_peak: 1.84G
+(T) | Epoch 01, loss: 3.6924, train_time_cost: 11.18, examples: 4212, nodes: 4212, gpu_peak: 1.84G
+(T) | Epoch 01, loss: 3.6876, train_time_cost: 11.76, examples: 4273, nodes: 4273, gpu_peak: 1.84G
+(T) | Epoch 01, loss: 3.6774, train_time_cost: 12.35, examples: 4272, nodes: 4272, gpu_peak: 1.84G
+(T) | Epoch 01, loss: 3.6855, train_time_cost: 12.93, examples: 4202, nodes: 4202, gpu_peak: 1.84G
+(T) | Epoch 01, loss: 3.6737, train_time_cost: 13.52, examples: 4224, nodes: 4224, gpu_peak: 1.84G
+(T) | Epoch 01, loss: 3.6777, train_time_cost: 14.11, examples: 4256, nodes: 4256, gpu_peak: 1.84G
+(T) | Epoch 01, loss: 3.6964, train_time_cost: 14.71, examples: 4307, nodes: 4307, gpu_peak: 1.84G
+(T) | Epoch 01, loss: 3.6751, train_time_cost: 15.31, examples: 4321, nodes: 4321, gpu_peak: 1.84G
+(T) | Epoch 01, loss: 3.6543, train_time_cost: 15.89, examples: 4193, nodes: 4193, gpu_peak: 1.84G
+(T) | Epoch 01, loss: 3.6935, train_time_cost: 16.51, examples: 4427, nodes: 4427, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6514, train_time_cost: 17.07, examples: 4064, nodes: 4064, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6545, train_time_cost: 17.66, examples: 4279, nodes: 4279, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6791, train_time_cost: 18.27, examples: 4317, nodes: 4317, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6711, train_time_cost: 18.87, examples: 4218, nodes: 4218, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6678, train_time_cost: 19.44, examples: 4209, nodes: 4209, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6771, train_time_cost: 20.03, examples: 4290, nodes: 4290, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6828, train_time_cost: 20.63, examples: 4391, nodes: 4391, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6615, train_time_cost: 21.22, examples: 4271, nodes: 4271, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6480, train_time_cost: 21.79, examples: 4141, nodes: 4141, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6655, train_time_cost: 22.37, examples: 4266, nodes: 4266, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6539, train_time_cost: 22.96, examples: 4201, nodes: 4201, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6472, train_time_cost: 23.55, examples: 4284, nodes: 4284, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6392, train_time_cost: 24.12, examples: 4141, nodes: 4141, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6349, train_time_cost: 24.69, examples: 4090, nodes: 4090, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6413, train_time_cost: 25.27, examples: 4189, nodes: 4189, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6346, train_time_cost: 25.85, examples: 4176, nodes: 4176, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6210, train_time_cost: 26.42, examples: 4108, nodes: 4108, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6584, train_time_cost: 27.00, examples: 4348, nodes: 4348, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6367, train_time_cost: 27.58, examples: 4163, nodes: 4163, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6486, train_time_cost: 28.17, examples: 4267, nodes: 4267, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6387, train_time_cost: 28.75, examples: 4230, nodes: 4230, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6343, train_time_cost: 29.34, examples: 4245, nodes: 4245, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6663, train_time_cost: 29.92, examples: 4299, nodes: 4299, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6550, train_time_cost: 30.51, examples: 4258, nodes: 4258, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6391, train_time_cost: 31.09, examples: 4266, nodes: 4266, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6567, train_time_cost: 31.68, examples: 4291, nodes: 4291, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6296, train_time_cost: 32.26, examples: 4124, nodes: 4124, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6127, train_time_cost: 32.84, examples: 4185, nodes: 4185, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6270, train_time_cost: 33.43, examples: 4287, nodes: 4287, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6143, train_time_cost: 34.00, examples: 4181, nodes: 4181, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6482, train_time_cost: 34.58, examples: 4207, nodes: 4207, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6703, train_time_cost: 35.17, examples: 4284, nodes: 4284, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6585, train_time_cost: 35.76, examples: 4339, nodes: 4339, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6401, train_time_cost: 36.35, examples: 4169, nodes: 4169, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6206, train_time_cost: 36.92, examples: 4144, nodes: 4144, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6351, train_time_cost: 37.52, examples: 4284, nodes: 4284, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6358, train_time_cost: 38.10, examples: 4208, nodes: 4208, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6231, train_time_cost: 38.68, examples: 4195, nodes: 4195, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6396, train_time_cost: 39.31, examples: 4317, nodes: 4317, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6350, train_time_cost: 39.89, examples: 4275, nodes: 4275, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6334, train_time_cost: 40.48, examples: 4278, nodes: 4278, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6445, train_time_cost: 41.07, examples: 4301, nodes: 4301, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6353, train_time_cost: 41.65, examples: 4245, nodes: 4245, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6537, train_time_cost: 42.26, examples: 4441, nodes: 4441, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6114, train_time_cost: 42.84, examples: 4279, nodes: 4279, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6253, train_time_cost: 43.42, examples: 4272, nodes: 4272, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6265, train_time_cost: 44.00, examples: 4250, nodes: 4250, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6390, train_time_cost: 44.59, examples: 4266, nodes: 4266, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6193, train_time_cost: 45.17, examples: 4234, nodes: 4234, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6359, train_time_cost: 45.76, examples: 4216, nodes: 4216, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6223, train_time_cost: 46.35, examples: 4292, nodes: 4292, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6329, train_time_cost: 46.95, examples: 4319, nodes: 4319, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6400, train_time_cost: 47.54, examples: 4328, nodes: 4328, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6263, train_time_cost: 48.12, examples: 4253, nodes: 4253, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6227, train_time_cost: 48.71, examples: 4277, nodes: 4277, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6110, train_time_cost: 49.29, examples: 4190, nodes: 4190, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6112, train_time_cost: 49.88, examples: 4223, nodes: 4223, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6115, train_time_cost: 50.46, examples: 4192, nodes: 4192, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6105, train_time_cost: 51.04, examples: 4164, nodes: 4164, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6228, train_time_cost: 51.62, examples: 4246, nodes: 4246, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6222, train_time_cost: 52.20, examples: 4212, nodes: 4212, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6163, train_time_cost: 52.79, examples: 4279, nodes: 4279, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6068, train_time_cost: 53.38, examples: 4300, nodes: 4300, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6112, train_time_cost: 53.97, examples: 4333, nodes: 4333, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6057, train_time_cost: 54.55, examples: 4203, nodes: 4203, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6125, train_time_cost: 55.13, examples: 4238, nodes: 4238, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6284, train_time_cost: 55.75, examples: 4390, nodes: 4390, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6235, train_time_cost: 56.34, examples: 4380, nodes: 4380, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6016, train_time_cost: 56.92, examples: 4223, nodes: 4223, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6076, train_time_cost: 57.51, examples: 4220, nodes: 4220, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6131, train_time_cost: 58.10, examples: 4289, nodes: 4289, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6080, train_time_cost: 58.69, examples: 4277, nodes: 4277, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6318, train_time_cost: 59.31, examples: 4211, nodes: 4211, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6030, train_time_cost: 59.91, examples: 4336, nodes: 4336, gpu_peak: 1.85G
+(T) | Epoch 01, loss: 3.6115, train_time_cost: 60.51, examples: 4262, nodes: 4262, gpu_peak: 1.85G
+*********************** Maximum training time is exceeded ***********************
+Finish training, training time cost: 60.51
+  0%|          | 0/24 [00:00<?, ?it/s]  4%|¢l         | 1/24 [00:01<00:25,  1.11s/it]  8%|¢o         | 2/24 [00:02<00:23,  1.07s/it] 12%|¢i¢k        | 3/24 [00:03<00:26,  1.27s/it] 17%|¢i¢n        | 4/24 [00:04<00:23,  1.18s/it] 21%|¢i¢i        | 5/24 [00:05<00:21,  1.14s/it] 25%|¢i¢i¢m       | 6/24 [00:06<00:20,  1.12s/it] 29%|¢i¢i¢p       | 7/24 [00:07<00:18,  1.10s/it] 33%|¢i¢i¢i¢k      | 8/24 [00:09<00:17,  1.10s/it] 38%|¢i¢i¢i¢o      | 9/24 [00:10<00:16,  1.09s/it] 42%|¢i¢i¢i¢i¢j     | 10/24 [00:11<00:15,  1.08s/it] 46%|¢i¢i¢i¢i¢m     | 11/24 [00:12<00:15,  1.22s/it] 50%|¢i¢i¢i¢i¢i     | 12/24 [00:13<00:13,  1.17s/it] 54%|¢i¢i¢i¢i¢i¢l    | 13/24 [00:14<00:12,  1.14s/it] 58%|¢i¢i¢i¢i¢i¢o    | 14/24 [00:15<00:11,  1.12s/it] 62%|¢i¢i¢i¢i¢i¢i¢k   | 15/24 [00:17<00:10,  1.17s/it] 67%|¢i¢i¢i¢i¢i¢i¢n   | 16/24 [00:18<00:09,  1.21s/it] 71%|¢i¢i¢i¢i¢i¢i¢i   | 17/24 [00:19<00:08,  1.23s/it] 75%|¢i¢i¢i¢i¢i¢i¢i¢m  | 18/24 [00:21<00:07,  1.25s/it] 79%|¢i¢i¢i¢i¢i¢i¢i¢p  | 19/24 [00:22<00:05,  1.19s/it] 83%|¢i¢i¢i¢i¢i¢i¢i¢i¢k | 20/24 [00:23<00:04,  1.21s/it] 88%|¢i¢i¢i¢i¢i¢i¢i¢i¢o | 21/24 [00:24<00:03,  1.22s/it] 92%|¢i¢i¢i¢i¢i¢i¢i¢i¢i¢j| 22/24 [00:26<00:02,  1.32s/it] 96%|¢i¢i¢i¢i¢i¢i¢i¢i¢i¢m| 23/24 [00:27<00:01,  1.33s/it]100%|¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i| 24/24 [00:27<00:00,  1.05s/it]100%|¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i| 24/24 [00:27<00:00,  1.16s/it]
+Start clustering, num_clusters:  41
+kmeans on cpu...
+Finish clustering, acc: 0.7371, nmi: 0.7941, ari: 0.7088, f1_macro: 0.6563, f1_micro: 0.7371, clustering time cost: 183.70
+
+----------------------runs  1 over
