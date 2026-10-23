@@ -29,8 +29,8 @@
 ## 2. 安裝
 
 ```bash
-git clone <本 repo 網址>
-cd MAGI
+git clone https://github.com/Bronny721/MAGI-datamining.git
+cd MAGI-datamining
 
 # 建立虛擬環境（腳本預設的 Python 路徑是 ../.venv，也可以用 PY 環境變數指定，見第 4 節）
 python -m venv ../.venv
